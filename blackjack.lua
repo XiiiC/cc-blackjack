@@ -212,13 +212,20 @@ function presentGame(hidden)
 end
 
 function presentBetting()
-	paintutils.drawImage(bet1, 6 , 14)
+	paintutils.drawImage(bet1, 26 , 24)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet10, 16 , 14)
+	paintutils.drawImage(bet10, 36 , 24)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet100, 2 , 21)
+	paintutils.drawImage(bet100, 22 , 31)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(go, 20 , 21)
+	paintutils.drawImage(go, 40 , 31)
+	term.setBackgroundColor(colors.green)
+end
+
+function presentHits()
+	paintutils.drawImage(hit, 26 , 24)
+	term.setBackgroundColor(colors.green)
+	paintutils.drawImage(stand, 36 , 24)
 	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION
@@ -244,9 +251,7 @@ while true do
 	while true do
 
 		term.clear()
-		monitor.setTextScale(2)
 		print("Bet: ".. playerBet)
-		monitor.setTextScale(1)
 
 		presentBetting()
 		local event, side, x, y = os.pullEvent("monitor_touch")
@@ -262,28 +267,20 @@ while true do
 		end
 
 	end
-	
 
-	playerBet = io.read("*n")
-	if playerBet == 0 then
-		break
-	end
-	print("Enter any key to continue")
-	io.read()
 	term.clear()
 	table.insert(playerHand, dealCard())
 	table.insert(houseHand, dealCard())
 	presentGame(true)
-	print("Enter any key to continue")
-	io.read()
+	event, side, x, y = os.pullEvent("monitor_touch")
+	
 	term.clear()
 	table.insert(playerHand, dealCard())
 	presentGame(true)
 	playerValue = getHandValue(playerHand)
 	table.insert(houseHand, dealCard())
 	presentGame(true)
-	print("Enter any key to continue")
-	io.read()
+	event, side, x, y = os.pullEvent("monitor_touch")
 	term.clear()
 	presentGame(true)
 	if(playerValue == 21) then

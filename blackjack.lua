@@ -178,8 +178,9 @@ while true do
 	print("=======================")
 	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
-	
+
 	paintutils.drawImage(cards[playerHand[1]], 23, 2)
+	term.setBackgroundColor(colors.green)
 	for i = 1, #(playerHand), 1 do
 		print(playerHand[i])
 	end

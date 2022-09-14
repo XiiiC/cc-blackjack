@@ -3,13 +3,13 @@
 -- SETUP
 
 local monitor = peripheral.find("monitor")
-assert(monitor~=nil, "no monitor connected =[")
+assert(monitor~=nil, "no monitor connected")
 local monitorX, monitorY = monitor.getSize()
-assert((monitorX==29 and monitorY==26) or (monitorX==57 and monitorY==52), "Monitor should be 3 wide and 4 tall! I believe in you. You're almost there! =D")
+--assert((monitorX==29 and monitorY==26) or (monitorX==57 and monitorY==52), "Monitor should be 3 wide and 4 tall")
 
 term.redirect(monitor)
 term.clear()
-monitor.setTextScale(2)
+monitor.setTextScale(0.5)
 term.setCursorPos(10, 13)
 term.write("loading...")
 
@@ -212,20 +212,20 @@ function presentGame(hidden)
 end
 
 function presentBetting()
-	paintutils.drawImage(bet1, 26 , 24)
+	paintutils.drawImage(bet1, 20 , 24)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet10, 36 , 24)
+	paintutils.drawImage(bet10, 30 , 24)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet100, 22 , 31)
+	paintutils.drawImage(bet100, 18 , 31)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(go, 40 , 31)
+	paintutils.drawImage(go, 34 , 31)
 	term.setBackgroundColor(colors.green)
 end
 
 function presentHits()
-	paintutils.drawImage(hit, 26 , 24)
+	paintutils.drawImage(hit, 20 , 24)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(stand, 36 , 24)
+	paintutils.drawImage(stand, 30 , 24)
 	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION
@@ -256,13 +256,13 @@ while true do
 		presentBetting()
 		local event, side, x, y = os.pullEvent("monitor_touch")
 		
-		if x >= 6 and x <= 11 and y >= 14 and y <= 18 then
+		if x >= 20 and x <= 25 and y >= 24 and y <= 28 then
 			playerBet = playerBet + 1
-		elseif x >= 16 and x<= 24 and y >= 14 and y <= 18 then
+		elseif x >= 30 and x<= 38 and y >= 24 and y <= 28 then
 			playerBet = playerBet + 10
-		elseif x >= 2 and x <= 14 and y >= 21 and y <= 25 then
+		elseif x >= 18 and x <= 24 and y >= 31 and y <= 36 then
 			playerBet = playerBet + 100
-		elseif x >= 20 and x <= 27 and y >= 21 and y <= 25 then
+		elseif x >= 34 and x <= 41 and y >= 31 and y <= 36 then
 			break
 		end
 
@@ -290,7 +290,13 @@ while true do
 	while playerValue < 21 do
 		presentGame(true)
 		print("Hit or Stand?")
-		local playerChoice = io.read()
+		presentHits()
+		event, side, x, y = os.pullEvent("monitor_touch")
+		if x >= 22 and x <= 27 and y >= 14 and y <= 18 then
+			playerChoice = "Hit"
+		elseif x >= 32 and x <= 38 and y >= 14 and y <= 18 then
+			playerChoice = "Stand"
+		end	
 		if playerChoice == "Hit" then
 			term.clear()
 			table.insert(playerHand, dealCard())

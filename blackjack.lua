@@ -160,9 +160,9 @@ function getHouseHandValue(hand)
 end
 
 function displayPlayerCards()
-	
+	local playerCardPosX = 1
 	for i = 1, #playerHand, 1 do
-		local playerCardPosX = #playerHand[i] * 14 + 1
+		playerCardPosX = i * 14 + 1
 		paintutils.drawImage(cards[playerHand[i]], playerCardPosX, 20)
 		term.setBackgroundColor(colors.green)
 	end
@@ -170,13 +170,14 @@ function displayPlayerCards()
 end
 
 function displayHouseCards()
-	local houseCardPosX = #houseHand * 14 + 1
+	local houseCardPosX = 1
 	if(#houseHand == 1) then
+		houseCardPosX = 15
 		paintutils.drawImage(cardBack, houseCardPosX, 2)
 		term.setBackgroundColor(colors.green)
 	else
 		for i = 1, #houseHand, 1 do
-			houseCardPosX = #houseHand[i] * 14 + 1
+			houseCardPosX = i * 14 + 1
 			paintutils.drawImage(cards[houseHand[i]], houseCardPosX, 2)
 			term.setBackgroundColor(colors.green)
 		end

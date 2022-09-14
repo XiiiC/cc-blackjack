@@ -16,6 +16,11 @@ term.write("loading...")
 
 -- CONSTANTS
 
+playerHand = {}
+houseHand = {}
+
+
+local playerCardWidth = 1*14-1
 playerCardPosX = math.floor(57/2-playerCardWidth/2)+1
 
 value = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
@@ -159,9 +164,6 @@ houseValue = 0
 playerValue = 0
 
 playerBet = 0
-
-playerHand = {}
-houseHand = {}
 
 generateDeck()
 

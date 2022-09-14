@@ -162,7 +162,7 @@ end
 function displayPlayerCards()
 	local playerCardPosX = #playerHand * 4 + 1
 	for i = 1, #playerHand, 1 do
-		paintutils.drawImage(cards[playerHand], playerCardPosX, 20)
+		paintutils.drawImage(cards[playerHand[i]], playerCardPosX, 20)
 		term.setBackgroundColor(colors.green)
 	end
 	
@@ -176,7 +176,7 @@ function displayHouseCards()
 	else
 		for i = 1, #houseHand, 1 do
 			houseCardPosX = #houseHand[i] * 4 + 1
-			paintutils.drawImage(cards[houseHand], houseCardPosX, 2)
+			paintutils.drawImage(cards[houseHand[i]], houseCardPosX, 2)
 			term.setBackgroundColor(colors.green)
 		end
 	end

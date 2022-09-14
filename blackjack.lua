@@ -9,7 +9,7 @@ assert((monitorX==29 and monitorY==26) or (monitorX==57 and monitorY==52), "Moni
 
 term.redirect(monitor)
 term.clear()
-monitor.setTextScale(0.5)
+monitor.setTextScale(2)
 term.setCursorPos(10, 13)
 term.write("loading...")
 
@@ -86,6 +86,13 @@ local cards = {
 }
 
 local cardBack = paintutils.loadImage("cc-blackjack/images/cards/cardBack.nfp")
+local bet100 = paintutils.loadImage("cc-blackjack/images/bets/100.nfp")
+local bet10 = paintutils.loadImage("cc-blackjack/images/bets/10.nfp")
+local bet1 = paintutils.loadImage("cc-blackjack/images/bets/1.nfp")
+local go = paintutils.loadImage("cc-blackjack/images/bets/go.nfp")
+
+local hit = paintutils.loadImage("cc-blackjack/images/hits/hit.nfp")
+local stand = paintutils.loadImage("cc-blackjack/images/hits/stand.nfp")
 
 -- FUNCTIONS
 
@@ -163,7 +170,7 @@ function displayPlayerCards()
 	local playerCardPosX = 1
 	for i = 1, #playerHand, 1 do
 		playerCardPosX = i * 11 + 1
-		paintutils.drawImage(cards[playerHand[i]], playerCardPosX, 20)
+		paintutils.drawImage(cards[playerHand[i]], playerCardPosX, 35)
 		term.setBackgroundColor(colors.green)
 	end
 	
@@ -186,6 +193,7 @@ end
 
 function presentGame(hidden)
 	term.clear()
+	print("Blackjack")
 	term.setBackgroundColor(colors.green)
 	if hidden == true then
 		if  #houseHand == 1 then
@@ -202,6 +210,14 @@ function presentGame(hidden)
 	term.setBackgroundColor(colors.green)
 end
 
+function presentBetting()
+	print("Bet: ".. playerBet)
+
+	paintutils.drawImage(bet1, 2 , 40)
+	paintutils.drawImage(bet10, 12 , 40)
+	paintutils.drawImage(bet100, 22 , 40)
+	paintutils.drawImage(go, 32 , 40)
+end
 -- EXECTUION
 
 houseValue = 0
@@ -218,7 +234,18 @@ term.clear()
 
 -- MAIN LOOP
 while true do
-	print("How much would you like to bet: ")
+	
+	term.clear()
+	monitor.setTextScale(1)
+	
+	while true do
+		presentBetting()
+		local event, side, x, y = os.pullEvent("monitor_touch")
+		
+
+	end
+	
+
 	playerBet = io.read("*n")
 	if playerBet == 0 then
 		break
@@ -234,8 +261,7 @@ while true do
 	term.clear()
 	table.insert(playerHand, dealCard())
 	presentGame(true)
-	--playerValue = getHandValue(playerHand)
-	print(playerValue)
+	playerValue = getHandValue(playerHand)
 	table.insert(houseHand, dealCard())
 	presentGame(true)
 	print("Enter any key to continue")
@@ -251,8 +277,6 @@ while true do
 		print("Hit or Stand?")
 		local playerChoice = io.read()
 		if playerChoice == "Hit" then
-			print("Enter any key to continue")
-			io.read()
 			term.clear()
 			table.insert(playerHand, dealCard())
 			presentGame(true)
@@ -297,6 +321,8 @@ while true do
 			print("PUSH")
 		end
 	end
+	print("Enter any key to continue")
+	io.read()
 	playerHand = {}
 	houseHand = {}
 

@@ -86,6 +86,7 @@ local cards = {
 }
 
 local cardBack = paintutils.loadImage("cc-blackjack/images/cards/cardBack.nfp")
+
 local bet100 = paintutils.loadImage("cc-blackjack/images/bets/100.nfp")
 local bet10 = paintutils.loadImage("cc-blackjack/images/bets/10.nfp")
 local bet1 = paintutils.loadImage("cc-blackjack/images/bets/1.nfp")
@@ -214,9 +215,13 @@ function presentBetting()
 	print("Bet: ".. playerBet)
 
 	paintutils.drawImage(bet1, 2 , 40)
+	term.setBackgroundColor(colors.green)
 	paintutils.drawImage(bet10, 12 , 40)
+	term.setBackgroundColor(colors.green)
 	paintutils.drawImage(bet100, 22 , 40)
+	term.setBackgroundColor(colors.green)
 	paintutils.drawImage(go, 32 , 40)
+	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION
 
@@ -241,7 +246,7 @@ while true do
 	while true do
 		presentBetting()
 		local event, side, x, y = os.pullEvent("monitor_touch")
-		
+
 
 	end
 	

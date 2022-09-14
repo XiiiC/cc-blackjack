@@ -85,6 +85,8 @@ local cards = {
 	["S-K"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-K.nfp"),
 }
 
+local cardBack = paintutils.loadImage("cc-blackjack/images/cards/cardBack.nfp")
+
 -- FUNCTIONS
 
 function generateDeck()
@@ -185,15 +187,16 @@ while true do
 	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
 
-	paintutils.drawImage(cards[playerHand[1]], 23, 2)
-	term.setBackgroundColor(colors.green)
+	
 	for i = 1, #(playerHand), 1 do
-		print(playerHand[i])
+		paintutils.drawImage(cards[playerHand[i]], 23, 20)
+		term.setBackgroundColor(colors.green)
 	end
+
 	table.insert(houseHand, dealCard())
 	print("=======================")
 	print("HOUSE's TURN")
-	print("####### of ######")
+	paintutils.drawImage(cardBack, 23, 2)
 	print("Enter any key to continue")
 	io.read()
 	term.clear()

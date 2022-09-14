@@ -212,15 +212,16 @@ function presentGame(hidden)
 end
 
 function presentBetting()
+	term.clear()
 	print("Bet: ".. playerBet)
 
-	paintutils.drawImage(bet1, 2 , 40)
+	paintutils.drawImage(bet1, 2 , 30)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet10, 12 , 40)
+	paintutils.drawImage(bet10, 12 , 30)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet100, 22 , 40)
+	paintutils.drawImage(bet100, 22 , 30)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(go, 32 , 40)
+	paintutils.drawImage(go, 32 , 30)
 	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION

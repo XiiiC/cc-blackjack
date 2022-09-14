@@ -171,7 +171,7 @@ shuffleDeck()
 
 term.setBackgroundColor(colors.green)
 term.clear()
-paintutils.drawImage(heartCards["A"], playerCardPosX, 28)
+paintutils.drawImage(spadeCards["2"], 23, 2)
 
 --MAIN LOOP
 

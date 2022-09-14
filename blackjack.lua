@@ -189,8 +189,9 @@ function presentGame(hidden)
 	term.setBackgroundColor(colors.green)
 	if hidden == true then
 		if  #houseHand == 1 then
+			paintutils.drawImage(cardBack, 12, 2)
+		elseif #houseHand == 2 then
 			paintutils.drawImage(cardBack, 1 * 11 + 1, 2)
-		elseif houseHand == 2 then
 			paintutils.drawImage(cards[houseHand[2]], 2 * 11 + 1, 2)
 		end
 	elseif hidden ~= true then
@@ -281,7 +282,7 @@ while true do
 			term.clear()
 			presentGame(false)
 			houseValue = getHandValue(houseHand)
-			print(houseValue)
+			
 
 		end
 		if(houseValue > 21) then

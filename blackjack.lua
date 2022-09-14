@@ -190,18 +190,14 @@ function presentGame(hidden)
 	if hidden == true then
 		if  #houseHand == 1 then
 			paintutils.drawImage(cardBack, 1 * 11 + 1, 2)
-			term.setBackgroundColor(colors.green)
-			displayPlayerCards()
 		elseif houseHand == 2 then
 			paintutils.drawImage(cards[houseHand[2]], 2 * 11 + 1, 2)
-			term.setBackgroundColor(colors.green)
-			displayPlayerCards()
 		end
 	elseif hidden ~= true then
 		
 		displayHouseCards()
-		displayPlayerCards()
 	end
+	displayPlayerCards()
 	term.setBackgroundColor(colors.green)
 end
 

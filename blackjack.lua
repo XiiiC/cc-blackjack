@@ -223,9 +223,9 @@ function presentBetting()
 end
 
 function presentHits()
-	paintutils.drawImage(hit, 20 , 24)
+	paintutils.drawImage(hit, 5 , 18)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(stand, 30 , 24)
+	paintutils.drawImage(stand, 30 , 18)
 	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION
@@ -260,7 +260,7 @@ while true do
 			playerBet = playerBet + 1
 		elseif x >= 30 and x<= 38 and y >= 24 and y <= 28 then
 			playerBet = playerBet + 10
-		elseif x >= 18 and x <= 24 and y >= 31 and y <= 36 then
+		elseif x >= 18 and x <= 28 and y >= 31 and y <= 36 then
 			playerBet = playerBet + 100
 		elseif x >= 34 and x <= 41 and y >= 31 and y <= 36 then
 			break
@@ -289,12 +289,11 @@ while true do
 	end
 	while playerValue < 21 do
 		presentGame(true)
-		print("Hit or Stand?")
 		presentHits()
 		event, side, x, y = os.pullEvent("monitor_touch")
-		if x >= 22 and x <= 27 and y >= 14 and y <= 18 then
+		if x >= 5 and x <= 27 and y >= 18 and y <= 31 then
 			playerChoice = "Hit"
-		elseif x >= 32 and x <= 38 and y >= 14 and y <= 18 then
+		elseif x >= 30 and x <= 53 and y >= 18 and y <= 31 then
 			playerChoice = "Stand"
 		end	
 		if playerChoice == "Hit" then
@@ -342,7 +341,7 @@ while true do
 			print("PUSH")
 		end
 	end
-	print("Enter any key to continue")
+	event, side, x, y = os.pullEvent("monitor_touch")
 	io.read()
 	playerHand = {}
 	houseHand = {}

@@ -213,15 +213,17 @@ end
 
 function presentBetting()
 	term.clear()
+	monitor.setTextScale(2)
 	print("Bet: ".. playerBet)
+	monitor.setTextScale(1)
 
-	paintutils.drawImage(bet1, 2 , 30)
+	paintutils.drawImage(bet1, 6 , 14)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet10, 12 , 30)
+	paintutils.drawImage(bet10, 16 , 14)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(bet100, 22 , 30)
+	paintutils.drawImage(bet100, 2 , 21)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(go, 32 , 30)
+	paintutils.drawImage(go, 20 , 21)
 	term.setBackgroundColor(colors.green)
 end
 -- EXECTUION
@@ -242,12 +244,13 @@ term.clear()
 while true do
 	
 	term.clear()
-	monitor.setTextScale(1)
+	
 	
 	while true do
 		presentBetting()
 		local event, side, x, y = os.pullEvent("monitor_touch")
-
+		print("The monitor on side " .. side .. " was touched at (" .. x .. ", " .. y .. ")")
+		
 
 	end
 	

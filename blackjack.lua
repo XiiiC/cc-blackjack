@@ -1,5 +1,18 @@
 -- Blackjack game
 
+-- SETUP
+
+local monitor = peripheral.find("monitor")
+assert(monitor~=nil, "no monitor connected =[")
+local monitorX, monitorY = monitor.getSize()
+assert((monitorX==29 and monitorY==26) or (monitorX==57 and monitorY==52), "Monitor should be 3 wide and 4 tall! I believe in you. You're almost there! =D")
+
+term.redirect(monitor)
+term.clear()
+monitor.setTextScale(0.5)
+term.setCursorPos(10, 13)
+term.write("loading...")
+
 
 -- CONSTANTS
 
@@ -151,11 +164,10 @@ houseHand = {}
 
 generateDeck()
 
-for i = 1, #deck do
-	print(deck[i])
-end
 shuffleDeck()
 
+term.setBackgroundColor(colors.green)
+term.clear()
 paintutils.drawImage(heartCards["A"], 1, 1)
 
 --MAIN LOOP

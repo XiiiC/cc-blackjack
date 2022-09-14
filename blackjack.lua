@@ -20,7 +20,7 @@ playerHand = {}
 houseHand = {}
 
 
-local playerCardWidth = 1*14-1
+local playerCardWidth = playerHand*14-1
 playerCardPosX = math.floor(57/2-playerCardWidth/2)+1
 
 value = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
@@ -30,74 +30,67 @@ deck = {}
 
 -- IMAGES
 
-local clubCards = {
-	["A"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-A.nfp"),
-	["2"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-2.nfp"),
-	["3"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-3.nfp"),
-	["4"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-4.nfp"),
-	["5"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-5.nfp"),
-	["6"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-6.nfp"),
-	["7"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-7.nfp"),
-	["8"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-8.nfp"),
-	["9"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-9.nfp"),
-	["10"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-10.nfp"),
-	["J"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-J.nfp"),
-	["Q"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-Q.nfp"),
-	["K"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-K.nfp"),
+local cards = {
+	["C-A"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-A.nfp"),
+	["C-2"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-2.nfp"),
+	["C-3"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-3.nfp"),
+	["C-4"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-4.nfp"),
+	["C-5"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-5.nfp"),
+	["C-6"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-6.nfp"),
+	["C-7"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-7.nfp"),
+	["C-8"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-8.nfp"),
+	["C-9"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-9.nfp"),
+	["C-10"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-10.nfp"),
+	["C-J"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-J.nfp"),
+	["C-Q"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-Q.nfp"),
+	["C-K"] = paintutils.loadImage("cc-blackjack/images/cards/clubs/C-K.nfp"),
+	["D-A"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-A.nfp"),
+	["D-2"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-2.nfp"),
+	["D-3"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-3.nfp"),
+	["D-4"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-4.nfp"),
+	["D-5"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-5.nfp"),
+	["D-6"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-6.nfp"),
+	["D-7"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-7.nfp"),
+	["D-8"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-8.nfp"),
+	["D-9"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-9.nfp"),
+	["D-10"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-10.nfp"),
+	["D-J"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-J.nfp"),
+	["D-Q"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-Q.nfp"),
+	["D-K"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-K.nfp"),
+	["H-A"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-A.nfp"),
+	["H-2"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-2.nfp"),
+	["H-3"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-3.nfp"),
+	["H-4"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-4.nfp"),
+	["H-5"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-5.nfp"),
+	["H-6"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-6.nfp"),
+	["H-7"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-7.nfp"),
+	["H-8"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-8.nfp"),
+	["H-9"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-9.nfp"),
+	["H-10"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-10.nfp"),
+	["H-J"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-J.nfp"),
+	["H-Q"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-Q.nfp"),
+	["H-K"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-K.nfp"),
+	["S-A"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-A.nfp"),
+	["S-2"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-2.nfp"),
+	["S-3"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-3.nfp"),
+	["S-4"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-4.nfp"),
+	["S-5"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-5.nfp"),
+	["S-6"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-6.nfp"),
+	["S-7"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-7.nfp"),
+	["S-8"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-8.nfp"),
+	["S-9"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-9.nfp"),
+	["S-10"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-10.nfp"),
+	["S-J"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-J.nfp"),
+	["S-Q"] = paintutils.loadImage("cc-blackjack/images/cards/spads/S-Q.nfp"),
+	["S-K"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-K.nfp"),
 }
-local diamondCards = {
-	["A"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-A.nfp"),
-	["2"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-2.nfp"),
-	["3"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-3.nfp"),
-	["4"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-4.nfp"),
-	["5"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-5.nfp"),
-	["6"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-6.nfp"),
-	["7"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-7.nfp"),
-	["8"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-8.nfp"),
-	["9"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-9.nfp"),
-	["10"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-10.nfp"),
-	["J"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-J.nfp"),
-	["Q"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-Q.nfp"),
-	["K"] = paintutils.loadImage("cc-blackjack/images/cards/diamonds/D-K.nfp"),
-}
-local heartCards = {
-	["A"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-A.nfp"),
-	["2"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-2.nfp"),
-	["3"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-3.nfp"),
-	["4"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-4.nfp"),
-	["5"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-5.nfp"),
-	["6"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-6.nfp"),
-	["7"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-7.nfp"),
-	["8"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-8.nfp"),
-	["9"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-9.nfp"),
-	["10"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-10.nfp"),
-	["J"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-J.nfp"),
-	["Q"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-Q.nfp"),
-	["K"] = paintutils.loadImage("cc-blackjack/images/cards/hearts/H-K.nfp"),
-}
-local spadeCards = {
-	["A"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-A.nfp"),
-	["2"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-2.nfp"),
-	["3"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-3.nfp"),
-	["4"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-4.nfp"),
-	["5"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-5.nfp"),
-	["6"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-6.nfp"),
-	["7"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-7.nfp"),
-	["8"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-8.nfp"),
-	["9"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-9.nfp"),
-	["10"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-10.nfp"),
-	["J"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-J.nfp"),
-	["Q"] = paintutils.loadImage("cc-blackjack/images/cards/spads/S-Q.nfp"),
-	["K"] = paintutils.loadImage("cc-blackjack/images/cards/spades/S-K.nfp"),
-}
-
 
 -- FUNCTIONS
 
 function generateDeck()
 	for i = 1, 4 do
 		for j = 1, 13 do
-			table.insert(deck, value[j] .. " " .. suit[i])
+			table.insert(deck, suit[i] .. "-" .. value[j])
 		end
 	end
 end
@@ -171,7 +164,6 @@ shuffleDeck()
 
 term.setBackgroundColor(colors.green)
 term.clear()
-paintutils.drawImage(spadeCards["2"], 23, 2)
 
 -- MAIN LOOP
 while true do
@@ -186,6 +178,8 @@ while true do
 	print("=======================")
 	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
+	
+	paintutils.drawImage(cards[playerHand[1]], 23, 2)
 	for i = 1, #(playerHand), 1 do
 		print(playerHand[i])
 	end

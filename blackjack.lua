@@ -169,13 +169,13 @@ function displayPlayerCards()
 end
 
 function displayHouseCards()
-	local houseCardPosX = #houseHand * 4 + 1
+	local houseCardPosX = #houseHand * 14 + 1
 	if(#houseHand == 1) then
 		paintutils.drawImage(cardBack, houseCardPosX, 2)
 		term.setBackgroundColor(colors.green)
 	else
 		for i = 1, #houseHand, 1 do
-			houseCardPosX = #houseHand[i] * 4 + 1
+			houseCardPosX = #houseHand[i] * 14 + 1
 			paintutils.drawImage(cards[houseHand[i]], houseCardPosX, 2)
 			term.setBackgroundColor(colors.green)
 		end
@@ -227,9 +227,10 @@ while true do
 	print("HOUSE's TURN")
 	table.insert(houseHand, dealCard())
 	print("####### of ######")
-	paintutils.drawImage(cardBack, 1 * 4 + 1, 2)
+	paintutils.drawImage(cardBack, 1 * 14 + 1, 2)
 	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(cards[houseHand[2]], 2 * 4 + 1, 2)
+	paintutils.drawImage(cards[houseHand[2]], 2 * 14 + 1, 2)
+	term.setBackgroundColor(colors.green)
 	print("Enter any key to continue")
 	io.read()
 	term.clear()

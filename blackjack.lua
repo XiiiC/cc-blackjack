@@ -212,11 +212,6 @@ function presentGame(hidden)
 end
 
 function presentBetting()
-	term.clear()
-	monitor.setTextScale(2)
-	print("Bet: ".. playerBet)
-	monitor.setTextScale(1)
-
 	paintutils.drawImage(bet1, 6 , 14)
 	term.setBackgroundColor(colors.green)
 	paintutils.drawImage(bet10, 16 , 14)
@@ -247,10 +242,24 @@ while true do
 	
 	
 	while true do
+
+		term.clear()
+		monitor.setTextScale(2)
+		print("Bet: ".. playerBet)
+		monitor.setTextScale(1)
+
 		presentBetting()
 		local event, side, x, y = os.pullEvent("monitor_touch")
-		print("The monitor on side " .. side .. " was touched at (" .. x .. ", " .. y .. ")")
 		
+		if x >= 6 and x <= 11 and y >= 14 and y <= 18 then
+			playerBet = playerBet + 1
+		elseif x >= 16 and x<= 24 and y >= 14 and y <= 18 then
+			playerBet = playerBet + 10
+		elseif x >= 2 and x <= 14 and y >= 21 and y <= 25 then
+			playerBet = playerBet + 100
+		elseif x >= 20 and x <= 27 and y >= 21 and y <= 25 then
+			break
+		end
 
 	end
 	

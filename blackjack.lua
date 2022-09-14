@@ -184,6 +184,27 @@ function displayHouseCards()
 	end
 end
 
+function presentGame(hidden)
+	term.clear()
+	term.setBackgroundColor(colors.green)
+	if hidden == true then
+		if  #houseHand == 1 then
+			paintutils.drawImage(cardBack, 1 * 11 + 1, 2)
+			term.setBackgroundColor(colors.green)
+			displayPlayerCards()
+		elseif houseHand == 2 then
+			paintutils.drawImage(cards[houseHand[2]], 2 * 11 + 1, 2)
+			term.setBackgroundColor(colors.green)
+			displayPlayerCards()
+		end
+	elseif hidden ~= true then
+		
+		displayHouseCards()
+		displayPlayerCards()
+	end
+	term.setBackgroundColor(colors.green)
+end
+
 -- EXECTUION
 
 houseValue = 0
@@ -208,52 +229,36 @@ while true do
 	print("Enter any key to continue")
 	io.read()
 	term.clear()
-	print("=======================")
-	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
 	table.insert(houseHand, dealCard())
-	displayPlayerCards()
-	print("=======================")
-	print("HOUSE's TURN")
-	displayHouseCards()
+	presentGame(true)
 	print("Enter any key to continue")
 	io.read()
 	term.clear()
-	print("=======================")
-	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
-	displayPlayerCards()
-	playerValue = getHandValue(playerHand)
+	presentGame(true)
+	--playerValue = getHandValue(playerHand)
 	print(playerValue)
-	print("=======================")
-	print("HOUSE's TURN")
 	table.insert(houseHand, dealCard())
-	print("####### of ######")
-	paintutils.drawImage(cardBack, 1 * 11 + 1, 2)
-	term.setBackgroundColor(colors.green)
-	paintutils.drawImage(cards[houseHand[2]], 2 * 11 + 1, 2)
-	term.setBackgroundColor(colors.green)
+	presentGame(true)
 	print("Enter any key to continue")
 	io.read()
 	term.clear()
-	print("=======================")
-	print("PLAYER's TURN")
-	displayPlayerCards()
+	presentGame(true)
 	if(playerValue == 21) then
 		print("BLACKJACK!")
 		print("PLAYER WINS")
 	end
 	while playerValue < 21 do
+		presentGame(true)
 		print("Hit or Stand?")
 		local playerChoice = io.read()
 		if playerChoice == "Hit" then
 			print("Enter any key to continue")
 			io.read()
 			term.clear()
-			print("=======================")
-			print("PLAYER's TURN")
 			table.insert(playerHand, dealCard())
-			displayPlayerCards()
+			presentGame(true)
 			playerValue = getHandValue(playerHand)
 			if playerValue > 21 then
 				break
@@ -269,9 +274,7 @@ while true do
 		print("HOUSE WINS")
 	end
 	if playerValue < 21 then
-		print("=======================")
-		print("HOUSE's TURN")
-		displayHouseCards()
+		presentGame(false)
 		houseValue = getHandValue(houseHand)
 		if(houseValue == 21) then
 			print("BLACKJACK!")
@@ -280,12 +283,7 @@ while true do
 		while houseValue < 17 do
 			table.insert(houseHand, dealCard())
 			term.clear()
-			print("=======================")
-			print("PLAYER's TURN")
-			displayPlayerCards()
-			print("=======================")
-			print("HOUSE's TURN")
-			displayHouseCards()
+			presentGame(false)
 			houseValue = getHandValue(houseHand)
 			print(houseValue)
 

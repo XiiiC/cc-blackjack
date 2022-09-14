@@ -194,7 +194,6 @@ end
 
 function presentGame(hidden)
 	term.clear()
-	print("Blackjack")
 	term.setBackgroundColor(colors.green)
 	if hidden == true then
 		if  #houseHand == 1 then
@@ -339,7 +338,6 @@ while true do
 		end
 	end
 	event, side, x, y = os.pullEvent("monitor_touch")
-	io.read()
 	playerHand = {}
 	houseHand = {}
 

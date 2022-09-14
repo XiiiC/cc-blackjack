@@ -228,23 +228,20 @@ function presentHits()
 	paintutils.drawImage(stand, 30 , 18)
 	term.setBackgroundColor(colors.green)
 end
--- EXECTUION
-
-houseValue = 0
-playerValue = 0
-
-playerBet = 0
-
-generateDeck()
-
-shuffleDeck()
-
-term.setBackgroundColor(colors.green)
-term.clear()
 
 -- MAIN LOOP
 while true do
 	
+	houseValue = 0
+	playerValue = 0
+
+	playerBet = 0
+	deck = {}
+	generateDeck()
+
+	shuffleDeck()
+
+	term.setBackgroundColor(colors.green)
 	term.clear()
 	
 	

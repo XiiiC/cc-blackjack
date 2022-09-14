@@ -138,13 +138,16 @@ function getHouseHandValue(hand)
 	local aces = 0
 	for i = 2, #hand do
 		local card = hand[i]
-		if card:sub(1, 1) == "A" then
+
+		local cardSuit,cardValue = string.match(card, "(.*)%-(.*)")
+
+		if cardValue:sub(1, 1) == "A" then
 			value = value + 11
 			aces = aces + 1
-		elseif card:sub(1, 1) == "J" or card:sub(1, 1) == "Q" or card:sub(1, 1) == "K" then
+		elseif cardValue:sub(1, 1) == "J" or cardValue:sub(1, 1) == "Q" or cardValue:sub(1, 1) == "K" then
 			value = value + 10
 		else
-			value = value + tonumber(card:sub(1, 2))
+			value = value + tonumber(cardValue:sub(1, 2))
 		end
 	end
 	while value > 21 and aces > 0 do

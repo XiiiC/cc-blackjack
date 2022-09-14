@@ -20,7 +20,7 @@ playerHand = {}
 houseHand = {}
 
 
-local playerCardWidth = playerHand*14-1
+local playerCardWidth = 1*14-1
 playerCardPosX = math.floor(57/2-playerCardWidth/2)+1
 
 value = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}

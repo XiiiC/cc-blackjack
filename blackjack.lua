@@ -159,6 +159,29 @@ function getHouseHandValue(hand)
 	return value
 end
 
+function displayPlayerCards()
+	local playerCardPosX = #playerHand * 4 + 1
+	for i = 1, #playerHand, 1 do
+		paintutils.drawImage(cards[playerHand], playerCardPosX, 20)
+		term.setBackgroundColor(colors.green)
+	end
+	
+end
+
+function displayHouseCards()
+	local houseCardPosX = #houseHand * 4 + 1
+	if(#houseHand == 1) then
+		paintutils.drawImage(cardBack, houseCardPosX, 2)
+		term.setBackgroundColor(colors.green)
+	else
+		for i = 1, #houseHand, 1 do
+			houseCardPosX = #houseHand[i] * 4 + 1
+			paintutils.drawImage(cards[houseHand], houseCardPosX, 2)
+			term.setBackgroundColor(colors.green)
+		end
+	end
+end
+
 -- EXECTUION
 
 houseValue = 0
@@ -186,40 +209,33 @@ while true do
 	print("=======================")
 	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
-
-	
-	for i = 1, #(playerHand), 1 do
-		paintutils.drawImage(cards[playerHand[i]], 23, 20)
-		term.setBackgroundColor(colors.green)
-	end
-
 	table.insert(houseHand, dealCard())
+	displayPlayerCards()
 	print("=======================")
 	print("HOUSE's TURN")
-	paintutils.drawImage(cardBack, 23, 2)
+	displayHouseCards()
 	print("Enter any key to continue")
 	io.read()
 	term.clear()
 	print("=======================")
 	print("PLAYER's TURN")
 	table.insert(playerHand, dealCard())
-	for i = 1, #(playerHand), 1 do
-		print(playerHand[i])
-	end
+	displayPlayerCards()
 	playerValue = getHandValue(playerHand)
 	print(playerValue)
 	print("=======================")
 	print("HOUSE's TURN")
 	table.insert(houseHand, dealCard())
 	print("####### of ######")
-	print(houseHand[2])
-	houseValue = getHouseHandValue(houseHand)
-	print(houseValue)
+	paintutils.drawImage(cardBack, 1 * 4 + 1, 2)
+	term.setBackgroundColor(colors.green)
+	paintutils.drawImage(cards[houseHand[2]], 2 * 4 + 1, 2)
 	print("Enter any key to continue")
 	io.read()
 	term.clear()
 	print("=======================")
 	print("PLAYER's TURN")
+	displayPlayerCards()
 	if(playerValue == 21) then
 		print("BLACKJACK!")
 		print("PLAYER WINS")
@@ -234,9 +250,7 @@ while true do
 			print("=======================")
 			print("PLAYER's TURN")
 			table.insert(playerHand, dealCard())
-			for i = 1, #(playerHand), 1 do
-				print(playerHand[i])
-			end
+			displayPlayerCards()
 			playerValue = getHandValue(playerHand)
 			if playerValue > 21 then
 				break
@@ -254,9 +268,7 @@ while true do
 	if playerValue < 21 then
 		print("=======================")
 		print("HOUSE's TURN")
-		for i = 1, #(houseHand), 1 do
-			print(houseHand[i])
-		end
+		displayHouseCards()
 		houseValue = getHandValue(houseHand)
 		if(houseValue == 21) then
 			print("BLACKJACK!")
@@ -264,11 +276,13 @@ while true do
 		end
 		while houseValue < 17 do
 			table.insert(houseHand, dealCard())
+			term.clear()
+			print("=======================")
+			print("PLAYER's TURN")
+			displayPlayerCards()
 			print("=======================")
 			print("HOUSE's TURN")
-			for i = 1, #(houseHand), 1 do
-				print(houseHand[i])
-			end
+			displayHouseCards()
 			houseValue = getHandValue(houseHand)
 			print(houseValue)
 
